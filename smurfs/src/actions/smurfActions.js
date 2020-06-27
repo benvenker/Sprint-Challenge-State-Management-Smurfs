@@ -4,12 +4,12 @@ export const fetchSmurfs = () => {
   return (dispatch) => {
     dispatch({ type: "FETCH_SMURFS_START" });
     axios
-      .get(`https://localhost:3333/smurfs`)
+      .get(`http://localhost:3333/smurfs`)
       .then((res) => {
         // console.log("FETCH_SMURFS_RES: ", res.data);
         dispatch({
           type: "FETCH_SMURFS_SUCCESS",
-          payload: res,
+          payload: res.data,
         });
       })
       .catch((res) => {
@@ -25,12 +25,12 @@ export const createSmurf = (formData) => {
   return (dispatch) => {
     dispatch({ type: "CREATE_SMURF_START" });
     axios
-      .post(`https://localhost:3000/smurfs`, formData)
+      .post(`http://localhost:3333/smurfs`, formData)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: "CREATE_SMURF_SUCCESS",
-          payload: res,
+          payload: res.data,
         });
       })
       .catch((res) => {

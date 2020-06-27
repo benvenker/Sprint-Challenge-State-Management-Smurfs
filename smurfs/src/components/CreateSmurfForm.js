@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { createSmurf } from "../actions/smurfActions";
-import { connect } from "react-redux";
 
 const CreateSmurfForm = (props) => {
-  // const [formState, setFormState] = useState({
-  //   name: "",
-  //   age: 0,
-  //   height: "",
-  //   id: Date.now(),
-  // });
+  const [formState, setFormState] = useState({
+    name: "",
+    age: 0,
+    height: "",
+    id: Date.now(),
+  });
 
   const handleChange = (e) => {
-    // setFormState({ [e.target.name]: e.target.value });
+    setFormState({ [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    // console.log({ formState });
+  const handleSubmit = (e, formState) => {
+    e.preventDefault();
+    createSmurf(formState);
+    console.log("Clicked");
   };
 
   return (
@@ -27,7 +29,7 @@ const CreateSmurfForm = (props) => {
             onChange={handleChange}
             type="text"
             name="name"
-            value={props.name}
+            value={formState.name}
           />
         </label>
         Age:
@@ -36,7 +38,7 @@ const CreateSmurfForm = (props) => {
             onChange={handleChange}
             type="text"
             name="age"
-            value={props.age}
+            value={formState.age}
           />
         </label>
         <label htmlFor="height">
@@ -45,7 +47,7 @@ const CreateSmurfForm = (props) => {
             onChange={handleChange}
             type="text"
             name="height"
-            value={props.height}
+            value={formState.height}
           />
         </label>
         <button onClick={handleSubmit}>CREATE SMURF!</button>
@@ -54,15 +56,4 @@ const CreateSmurfForm = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    name: "",
-    age: 0,
-    height: "",
-    id: Date.now(),
-  };
-};
-
-export default connect(mapStateToProps, {
-  createSmurf,
-})(CreateSmurfForm);
+export default CreateSmurfForm;
