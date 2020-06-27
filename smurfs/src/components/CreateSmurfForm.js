@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { createSmurf } from "../actions/smurfActions";
 
-const CreateSmurfForm = (props) => {
+const CreateSmurfForm = () => {
   const [formState, setFormState] = useState({
     name: "",
     age: 0,
@@ -11,12 +11,19 @@ const CreateSmurfForm = (props) => {
   });
 
   const handleChange = (e) => {
-    setFormState({ [e.target.name]: e.target.value });
+    console.log(formState);
+    setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e, formState) => {
+    console.log("formState from component: ", formState);
     e.preventDefault();
-    createSmurf(formState);
+    createSmurf({
+      name: "Ben",
+      age: 23,
+      height: "6'2",
+      id: Date.now(),
+    });
     console.log("Clicked");
   };
 

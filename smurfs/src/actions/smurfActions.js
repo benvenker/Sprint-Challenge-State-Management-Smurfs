@@ -21,13 +21,16 @@ export const fetchSmurfs = () => {
   };
 };
 
-export const createSmurf = (formData) => {
+export const createSmurf = (formState) => {
+  console.log("createSmurf!");
+  console.log({ formState });
   return (dispatch) => {
     dispatch({ type: "CREATE_SMURF_START" });
     axios
-      .post(`http://localhost:3333/smurfs`, formData)
+      .post(`http://localhost:3333/smurfs`, formState)
       .then((res) => {
         console.log(res.data);
+        console.log("Successfully created smurf!");
         dispatch({
           type: "CREATE_SMURF_SUCCESS",
           payload: res.data,
