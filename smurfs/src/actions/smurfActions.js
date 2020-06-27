@@ -28,12 +28,13 @@ export const createSmurf = (formState) => {
     dispatch({ type: "CREATE_SMURF_START" });
     axios
       .post(`http://localhost:3333/smurfs`, formState)
-      .then((res) => {
-        console.log(res.data);
-        console.log("Successfully created smurf!");
-        dispatch({
-          type: "CREATE_SMURF_SUCCESS",
-          payload: res.data,
+      .then(() => {
+        axios.get("http://localhost:3333/smurfs").then((res) => {
+          console.log("smurfs form createSmurfs: ", res.data);
+          dispatch({
+            type: "CREATE_SMURF_SUCCESS",
+            payload: res.data,
+          });
         });
       })
       .catch((res) => {
