@@ -48,6 +48,26 @@ export const smurfsReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload,
       };
+    case "DELETE_SMURF_START":
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case "DELETE_SMURF_SUCCESS":
+      return {
+        smurfs: action.payload,
+        isFetching: false,
+      };
+    case "DELETE_SMURF_START":
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case "DELETE_SMURF_FAILURE":
+      return {
+        ...state,
+        isFetching: false,
+      };
     default:
       return state;
   }

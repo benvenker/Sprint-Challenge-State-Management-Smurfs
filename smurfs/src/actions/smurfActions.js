@@ -44,3 +44,25 @@ export const createSmurf = (formState) => {
       });
   };
 };
+
+export const deleteSmurf = (smurfId) => {
+  console.log("Smurf to be dleted: ", smurfId);
+
+  return (dispatch) => {
+    dispatch({ type: "DELETE_SMURF_START" });
+    axios
+      .delete(`http://localhost:3333/smurfs/${smurfId}`)
+      .then((res) => {
+        dispatch({
+          type: "DELETE_SMURF_SUCCESS",
+          payload: res.data,
+        });
+      })
+      .catch((res) => {
+        dispatch({
+          type: "DELETE_SMURF_FAILURE",
+          payload: "Error deleting smurf",
+        });
+      });
+  };
+};

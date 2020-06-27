@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
-import { fetchSmurfs } from "../actions/smurfActions";
+import { fetchSmurfs, deleteSmurf } from "../actions/smurfActions";
 
 const Smurfs = (props) => {
   console.log("smurf props: ", props);
@@ -23,7 +23,14 @@ const Smurfs = (props) => {
       <button onClick={props.fetchSmurfs}>Get Smurfs</button>
       <ul>
         {props.smurfs.map((smurf) => (
-          <li>{smurf.name}</li>
+          <li>
+            Name: {smurf.name} | Age: {smurf.age} | Height: {smurf.height}
+            <span>
+              <button onCLick={() => props.deleteSmurf(smurf.id)}>
+                Delete
+              </button>
+            </span>
+          </li>
         ))}
       </ul>
     </div>
@@ -39,4 +46,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   fetchSmurfs,
+  deleteSmurf,
 })(Smurfs);
