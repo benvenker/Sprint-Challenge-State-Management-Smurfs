@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { createSmurf } from "../actions/smurfActions";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
-const CreateSmurfForm = () => {
+const CreateSmurfForm = (props) => {
   const [formState, setFormState] = useState({
     name: "",
     age: 0,
@@ -15,16 +17,10 @@ const CreateSmurfForm = () => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e, formState) => {
+  const handleSubmit = (e) => {
     console.log("formState from component: ", formState);
     e.preventDefault();
-    createSmurf({
-      name: "Ben",
-      age: 23,
-      height: "6'2",
-      id: Date.now(),
-    });
-    console.log("Clicked");
+    props.createSmurf(formState);
   };
 
   return (
@@ -63,4 +59,4 @@ const CreateSmurfForm = () => {
   );
 };
 
-export default CreateSmurfForm;
+export default connect(() => {}, { createSmurf })(CreateSmurfForm);
